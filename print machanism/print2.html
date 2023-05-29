@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <title>Document</title>
+</head>
+
+
+
+
+
+
+
+
+
+<form onsubmit="callvalue()" class="text-center">
+    <h1>Registration Form</h1>
+    Username: <input type="text" placeholder="username" id="uname"><br />
+    Email: <input type="Email" placeholder="Email" id="email"><br />
+    Mobile No.: <input type="number" placeholder="Mobile no." id="mobileno."><br />
+    <input type="submit" value="register">
+</form>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+    function callvalue() {
+        var name = document.getElementById("uname").value;
+        var email = document.getElementById("email").value;
+        var mobile = document.getElementById("mobileno.").value;
+        // document.writeln("Your Info:" + "<br/>" + "Your Name:" + name + "<br/>");
+        // document.writeln("Your Email:" + email + "<br/>");
+        // document.writeln("Your Mobile Number:" + mobile);
+        document.writeln(name + "<br/>");
+        document.writeln(email + "<br/>");
+        document.writeln(mobile);
+    }
+
+</script>
+
+</html>

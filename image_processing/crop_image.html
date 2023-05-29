@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <input type="file" class="btn mx-5" id="imageInput">
+    <canvas id="canvas" width="500" height="500"></canvas> -->
+
+    <h2>Cropping Images in JavaScript</h2>
+    <p>Image Credit: <a href="https://pixabay.com/photos/tulips-flowers-field-sky-6897351/">Pixabay</a></p>
+    <div><canvas id="canvas"></canvas></div>
+    <div><button class="download">Download Image</button></div>
+
+    <script>
+        imagePath = './images/indesadfx.jpg';
+    </script>
+    <script>
+        // create a new canvas element
+        cropImage(imagePath, 0, 0, 200, 200);
+
+
+        //crop the image and draw it to the canvas
+        function cropImage(imagePath, newX, newY, newWidth, newHeight) {
+            //create an image object from the path
+            const originalImage = new Image();
+            originalImage.src = imagePath;
+
+            //initialize the canvas object
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            //wait for the image to finish loading
+            originalImage.addEventListener('load', function () {
+
+                //set the canvas size to the new width and height
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                //draw the image
+                ctx.drawImage(originalImage, newX, newY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+            });
+        }
+
+        //find the input elements in the html
+        const downloadBtn = document.querySelector("button.download");
+
+        //bind a click listener to the download button
+        downloadBtn.addEventListener('click', function () {
+            //create a temporary link for the download item
+            let tempLink = document.createElement('a');
+
+            //generate a new filename
+            let fileName = `image-cropped.jpg`;
+
+            //configure the link to download the resized image
+            tempLink.download = fileName;
+            tempLink.href = document.getElementById('canvas').toDataURL("image/jpeg", 0.9);
+
+            //trigger a click on the link to start the download
+            tempLink.click();
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+.Title1 {
+    margin-right: 55px;
+    line-height: 100%;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.Name1 {
+    margin-left: 40px;
+    margin-top: -18px;
+}
+
+.name1 {
+    margin-top: -18px;
+    margin-left: 52px;
+    font-size: 15px;
+}
+
+.address1 {
+    margin-bottom: 2px;
+    margin-top: -22px;
+    font-size: 12px;
+    margin-left: 40px;
+}
+
+.address2 {
+    margin-bottom: 2px;
+    font-size: 10px;
+    margin-left: 40px;
+}
+
+.image2 {
+    width: 84%;
+    height: 84%;
+    margin-left: -10px;
+}
+
+.table1 {
+    width: 500px;
+
+}
+
+.Notation {
+    margin-right: 15px;
+}
+
+.note {
+    font-size: 10px;
+}
+
+@media print {
+
+    /* Set the width of the receipt container */
+    .container1 {
+        width: 42%;
+        float: left;
+        height: 100%;
+    }
+
+    .image1 {
+        width: 74%;
+        height: 84%;
+        margin-left: -10px;
+    }
+
+    .Title {
+        margin-right: 55px;
+        line-height: 110%;
+        font-size: 18px;
+    }
+
+    .Name {
+        margin-left: 30px;
+        margin-top: -14px;
+    }
+
+    .name {
+        margin-top: -14px;
+        margin-left: 40px;
+        font-size: 10px;
+    }
+
+    .table {
+        width: 400px;
+
+    }
+
+    .Notation {
+        margin-top: -10px;
+    }
+
+    .address {
+        margin-bottom: 2px;
+        margin-top: -20px;
+        font-size: 10px;
+    }
+
+    .address2 {
+        margin-bottom: 2px;
+        font-size: 7px;
+        margin-top: -5px;
+        margin-left: 40px;
+    }
+
+    .lh2 {
+        line-height: 80%;
+    }
+
+    .note {
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,44 @@
+@font-face {
+    font-family: "mystyle";
+    src: url(./high-speed/HIGHSPEED.TTF);
+}
+
+@font-face {
+    font-family: "hindidotted";
+    src: url(./high-speed/Dotted.TTF);
+}
+
+@font-face {
+    font-family: "constamfont";
+    src: url(./florisa-font/FlorisaPersonalUse-nRm84.otf);
+}
+
+@font-face {
+    font-family: "hindi";
+    src: url(./subset-Highspeed.woff);
+}
+
+.costam_font {
+    font-family: 'Anton', sans-serif;
+    display: inline-block;
+    /* padding: 20px; */
+    /* border: 1px solid #ddd; */
+    font-size: 100px;
+    /* background-color: black; */
+    /* color: white; */
+    /* background: #ddd; */
+    position: relative;
+
+    &::before {
+        display: block;
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAMAAABFaP0WAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAA5JREFUCNdjYGRgYGQEAAAOAATa5WfvAAAAAElFTkSuQmCC);
+        background-size: 5px 5px;
+    }
+}

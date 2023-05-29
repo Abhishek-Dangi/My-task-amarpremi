@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Adding Text to Image</title>
+</head>
+
+<body>
+    <h1>Adding Text to Image</h1>
+    <canvas id="myCanvas"></canvas>
+
+    <button onclick="saveImage()">Save Image</button>
+    <form action="./image4.html">
+        <br><label for="">enter your text</label><br>
+        <input type="text" id="input">
+        <input type="button" name="button" value="sub">
+    </form>
+
+    <script>
+        // Load the image
+        // var text = prompt();
+        var text = document.getElementById("input").value;
+        var img = new Image();
+        img.onload = function () {
+            // Get the canvas element
+            var canvas = document.getElementById("myCanvas");
+            // var text = document.getElementsByTagName("input");
+            // Set the canvas dimensions to match the image
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Get the canvas context
+            var ctx = canvas.getContext("2d");
+
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Set the font and color for the text
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "red";
+
+
+            // Add the text to the canvas
+            ctx.fillText("" + text + "", 50, 50);
+
+            // document.write(" a" + text + " a");
+        };
+        img.src = "./images/indesadfx.jpg";
+
+        window.load = function saveImage() {
+            // Get the canvas data as a base64 encoded string
+            var dataURL = canvas.toDataURL("");
+
+            // Create a temporary link element
+            var link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "http://127.0.0.1:5500/image4.html";
+
+            // Click the link to download the image
+            link.click();
+
+        }
+    </script>
+
+
+</body>
+
+</html>

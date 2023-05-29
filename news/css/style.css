@@ -1,0 +1,283 @@
+body {
+  overflow: auto;
+}
+
+/* hover dropdown */
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+/* end */
+.top {
+  background-color: rgb(229, 226, 226);
+
+  box-sizing: border-box;
+
+}
+
+.facebook i :hover {
+
+  border-radius: 23px;
+  transition: all 0.7s ease;
+}
+
+/* button {
+  height: 24px;
+  width: 82px;
+  
+} */
+button p {
+
+  margin-top: -7px;
+}
+
+.fott ul li a:hover {
+  text-decoration: underline;
+  transition: all 0.7s ease;
+
+}
+
+.top i:hover {
+  cursor: pointer;
+}
+
+.topp {
+  font-size: 23px;
+  padding-top: 7px;
+  padding-left: 12px;
+  transition: all 0.7s ease;
+
+}
+
+.face {
+  color: blue;
+}
+
+.twt {
+  color: rgb(22, 115, 146);
+}
+
+.you {
+  color: red;
+}
+
+
+form.example input[type=text] {
+
+  font-size: 16px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 15%;
+
+  background: #2196F3;
+  color: white;
+
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+  transition: all 0.7s ease;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.sectionn {
+  padding: 23px;
+}
+
+.top2 ul li {
+  list-style: none;
+}
+
+.top2 ul {
+  justify-content: center;
+}
+
+.top2 ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+
+
+/* navbarhover */
+.navhov :hover {
+  text-decoration: underline;
+  transition: all 0.7s ease;
+  background-color: rgb(61, 60, 60);
+  cursor: pointer;
+  padding: 10px;
+  margin: 0%;
+  text-emphasis-color: rgb(rgb(105, 96, 96));
+
+}
+
+.zoom {
+
+
+  transition: transform .2s;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.5);
+  /* IE 9 */
+  -webkit-transform: scale(1.5);
+  /* Safari 3-8 */
+  transform: scale(1.5);
+  transition: all 0.7s ease;
+}
+
+.text2 {
+  text-decoration: none;
+}
+
+.spot a {
+  margin-top: 23px;
+}
+
+.text {
+  font-size: 20px;
+}
+
+footer {
+  color: aliceblue;
+}
+
+footer hr {
+  width: 80%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  text-align: center;
+}
+
+.last1 {
+  text-decoration: none;
+  color: white;
+}
+
+.last1:hover {
+  text-decoration: underline;
+  border-bottom: red;
+  transition: all 0.7s ease;
+
+  cursor: pointer;
+
+  margin: 0%;
+  text-emphasis-color: rgb(rgb(105, 96, 96));
+}
+
+.dark {
+  background-color: rgb(28, 27, 27);
+}
+
+.text-white {
+  text-decoration: none;
+}
+
+/* footer container hover */
+
+.fotp p a:hover {
+  text-decoration: underline;
+  color: white;
+  transition: all 0.7s ease;
+}
+
+.copy a {
+  text-decoration: none;
+}
+
+.copy a :hover {
+  text-decoration: underline;
+  color: white;
+  transition: all 0.7s ease;
+}
+
+
+.foot a :hover {
+  text-decoration: underline;
+  transition: all 0.7s ease;
+}
+
+.fontt li {
+  font-size: 10px;
+}
+
+.blue {
+  text-decoration: none;
+}
+
+.text {
+  color: black;
+  text-decoration: none;
+}
+
+.text3 {
+  color: black;
+  text-decoration: underline;
+
+}
+
+ul {
+  list-style: none;
+}
+
+.container li {
+  list-style: none;
+}
+
+
+.sectionnn ul {
+  font-size: 2px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.colo {
+  background-color: #e7e7e7
+}
+
+.top {
+  background-color: rgb(25, 35, 45);
+}
+
+
+
+.force-overflow {
+  min-height: 450px;
+}
+
+/* font style costam */
+@font-face {
+  font-family: 'costam-font-family';
+  src: url(../high-speed/HIGHSPEED.TTF);
+}

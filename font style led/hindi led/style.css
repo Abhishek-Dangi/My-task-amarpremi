@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "hindifont";
+    src: url(./Dotted.TTF);
+}
+
+@font-face {
+    font-family: "bgfont";
+    src: url(./astalamet_bf/Astalamet.ttf);
+}
+
+@font-face {
+    font-family: "hindifont";
+    src: url(./Dotted.TTF);
+}
+
+.bgfont {
+    color: black;
+    font-family: 'bgfont', Courier, monospace;
+}
+
+.hindifont {
+    color: black;
+    font-family: 'hindifont', Courier, monospace;
+}

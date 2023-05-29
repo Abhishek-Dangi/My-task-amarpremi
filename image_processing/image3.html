@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Adding Text to Image</title>
+</head>
+
+<body>
+    <h1>Adding Text to Image</h1>
+    <canvas id="myCanvas"></canvas>
+
+    <script>
+        // Load the image
+        var img = new Image();
+        img.onload = function () {
+            // Get the canvas element
+            var canvas = document.getElementById("myCanvas");
+
+            // Set the canvas dimensions to match the image
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Get the canvas context
+            var ctx = canvas.getContext("2d");
+
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Set the font and color for the text
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "red";
+
+            // Add the text to the canvas
+            ctx.fillText("Hello, World!", 50, 50);
+        };
+        img.src = "./images/indesadfx.jpg";
+    </script>
+</body>
+
+</html>

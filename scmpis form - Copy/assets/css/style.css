@@ -1,0 +1,77 @@
+.Title1 {
+    margin-right: 185px;
+    line-height: 110%;
+    font-size: 22px;
+}
+
+.Name1 {
+    margin-left: 40px;
+    margin-top: -14px;
+}
+
+.name1 {
+    margin-top: -14px;
+    margin-left: 45px;
+    font-size: 15px;
+}
+
+.address1 {
+    margin-bottom: 2px;
+    margin-top: -20px;
+    font-size: 12px;
+    margin-left: 40px;
+}
+
+.image2 {
+    width: 40%;
+    height: 65%;
+    margin-left: 35px;
+}
+
+@media print {
+
+    /* Set the width of the receipt container */
+    .container1 {
+        width: 50%;
+        float: left;
+        height: 100%;
+    }
+
+
+    .image1 {
+        width: 45%;
+        height: 70%;
+        margin-left: 48px;
+    }
+
+    .Title {
+        margin-right: 125px;
+        line-height: 110%;
+        font-size: 18px;
+    }
+
+    .Name {
+        margin-left: 30px;
+        margin-top: -14px;
+    }
+
+    .name {
+        margin-top: -14px;
+        margin-left: 40px;
+        font-size: 12px;
+    }
+
+    .Notation {
+        margin-top: -10px;
+    }
+
+    .address {
+        margin-bottom: 2px;
+        margin-top: -10px;
+        font-size: 10px;
+    }
+
+    .lh2 {
+        line-height: 80%;
+    }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Caman('#my-image', function () {
+            this.brightness(10);
+            this.contrast(30);
+            this.sepia(60);
+            this.saturation(-30);
+            this.render();
+        });
+    </script>
+    <!-- HTML data attribute -->
+
+    <img data-caman="brightness(10) contrast(30) sepia(60) saturation(-30)" data-caman-hidpi="/path/to/image@2x.jpg"
+        src="./images/IMG_4356.jpg">
+
+</body>
+
+</html>

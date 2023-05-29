@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="" height="200px" width="400px" src="./images/IMG_4355.jpg" />
+    <img height="200px" width="400px" id="caman-image" src="./images/IMG_4355.jpg" />
+    <script src="caman.js"></script>
+    <script>
+        Caman('#caman-image', function () {
+            this.brightness(100).render();
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<style>
+    .carousel-container {
+        position: relative;
+    }
+
+    .carousel {
+        display: flex;
+        overflow-x: hidden;
+    }
+
+    img {
+        flex: 0 0 100%;
+    }
+
+    .prev-btn,
+    .next-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 24px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .prev-btn {
+        left: 0;
+    }
+
+    .next-btn {
+        right: 0;
+    }
+</style>
+<script>
+    const carousel = document.querySelector('.carousel');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let counter = 0;
+    const size = carousel.clientWidth;
+
+    prevBtn.addEventListener('click', () => {
+        if (counter > 0) {
+            counter--;
+            carousel.style.transform = `translateX(${-size * counter}px)`;
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (counter < carousel.children.length - 1) {
+            counter++;
+            carousel.style.transform = `translateX(${-size * counter}px)`;
+        }
+    });
+</script>
+
+<body>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="../image/ima (1).jpg" alt="Image 1">
+            </div>
+            <div class="carousel-item">
+                <img src="../image/ima (2).jpg" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="../image/ima (3).jpg" alt="Image 3">
+            </div>
+        </div>
+        <button class="prev-btn">&#8249;</button>
+        <button class="next-btn">&#8250;</button>
+    </div>
+
+
+</html>

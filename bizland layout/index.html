@@ -1,0 +1,924 @@
+</html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../bootsrap layout/css/mdb.dark.min.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+    <!-- counter -->
+
+</head>
+
+<script>
+
+    (function ($) {
+        $.fn.countTo = function (options) {
+            options = options || {};
+
+            return $(this).each(function () {
+                // set options for current element
+                var settings = $.extend({}, $.fn.countTo.defaults, {
+                    from: $(this).data('from'),
+                    to: $(this).data('to'),
+                    speed: $(this).data('speed'),
+                    refreshInterval: $(this).data('refresh-interval'),
+                    decimals: $(this).data('decimals')
+                }, options);
+
+                // how many times to update the value, and how much to increment the value on each update
+                var loops = Math.ceil(settings.speed / settings.refreshInterval),
+                    increment = (settings.to - settings.from) / loops;
+
+                // references & variables that will change with each update
+                var self = this,
+                    $self = $(this),
+                    loopCount = 0,
+                    value = settings.from,
+                    data = $self.data('countTo') || {};
+
+                $self.data('countTo', data);
+
+                // if an existing interval can be found, clear it first
+                if (data.interval) {
+                    clearInterval(data.interval);
+                }
+                data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+                // initialize the element with the starting value
+                render(value);
+
+                function updateTimer() {
+                    value += increment;
+                    loopCount++;
+
+                    render(value);
+
+                    if (typeof (settings.onUpdate) == 'function') {
+                        settings.onUpdate.call(self, value);
+                    }
+
+                    if (loopCount >= loops) {
+                        // remove the interval
+                        $self.removeData('countTo');
+                        clearInterval(data.interval);
+                        value = settings.to;
+
+                        if (typeof (settings.onComplete) == 'function') {
+                            settings.onComplete.call(self, value);
+                        }
+                    }
+                }
+
+                function render(value) {
+                    var formattedValue = settings.formatter.call(self, value, settings);
+                    $self.html(formattedValue);
+                }
+            });
+        };
+
+        $.fn.countTo.defaults = {
+            from: 0,               // the number the element should start at
+            to: 0,                 // the number the element should end at
+            speed: 1000,           // how long it should take to count between the target numbers
+            refreshInterval: 100,  // how often the element should be updated
+            decimals: 0,           // the number of decimal places to show
+            formatter: formatter,  // handler for formatting the value before rendering
+            onUpdate: null,        // callback method for every time the element is updated
+            onComplete: null       // callback method for when the element finishes updating
+        };
+
+        function formatter(value, settings) {
+            return value.toFixed(settings.decimals);
+        }
+    }(jQuery));
+
+    jQuery(function ($) {
+        // custom formatting example
+        $('.count-number').data('countToOptions', {
+            formatter: function (value, options) {
+                return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+            }
+        });
+
+        // start all the timers
+        $('.timer').each(count);
+
+        function count(options) {
+            var $this = $(this);
+            options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+            $this.countTo(options);
+        }
+    });
+</script>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg  navbar-light bg-primary mb-0 ">
+        <div class="container-fluid ">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto text-light ">
+                    <li class="nav-item">
+                        <p class="px-1 mx-5"><i class="bi mx-1 bi-envelope"></i>contact@example.com
+                        </p>
+                    </li>
+                    <li class="nav-item">
+                        <p><i class="bi bi-phone mx-1"></i>+1 5589 55488 55</p>
+                    </li>
+                </ul>
+                <ul class="d-flex list-unstyled me-5 pe-5 text-light ">
+                    <li class="nav-item  px-2">
+                        <i class="bi bi-twitter"></i>
+                    </li>
+                    <li class="nav-item px-2 ">
+                        <i class="bi bi-facebook"></i>
+                    </li>
+                    <li class="nav-item px-2">
+                        <i class="bi bi-instagram"></i>
+                    </li>
+                    <li class="nav-item px-2 
+                            ">
+                        <i class="bi bi-linkedin"></i>
+                    </li>
+
+                </ul>
+                <!-- <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form> -->
+            </div>
+        </div>
+    </nav>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light container-fluid sticky-top">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                    <p class="h2"><a class="nav-link mx-5 px-5 text-dark" aria-current="page" href="#">BizLand<span
+                                class="text-primary">.</span></a></p>
+                </li>
+            </ul>
+            <ul class="d-flex list-unstyled mb-2 mx-5 px-5">
+                <li class="nav-item">
+                    <a class="nav-link mx-1 page-scroll" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-1 page-scroll" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-1 page-scroll" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-1 page-scroll" href="#">Portfolio</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link page-scroll" href="#">Team</a>
+                </li>
+                <li class="nav-item dropdown d-inline">
+                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Drop Down
+                    </a>
+                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item " href="#">Drop Down1</a></li>
+                        <li><a class="dropdown-item" href="#">Drop Down down</a></li>
+
+                        <li><a class="dropdown-item" href="#">Drop Down3</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link page-scroll" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    </div>
+
+    <section id="hero1 home " class="hero h-100 container-fluid ">
+        <div class="inner">
+            <img src="./images/hero-bg.jpg" class="opacity-50" height="500" width="1366" alt="">
+            <div class="copy text-start mx-5 px-5">
+                <h1 class=" text-black h1 fw-bold">Welcome to <span class="text-primary">BizLand</span></h1>
+                <p class="text-dark h3">We are team of talented designers making websites with Bootstrap</p>
+                <button class="btn btn-primary mx-4 mt-2 px-4 pt-2 pb-2">GET STARTED</button>
+                <button class="btn text-black mx-2 fs-6 align-items-center"><i
+                        class="bi bi-play-circle text-primary h3 p-2  "></i>Watch Video</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="project-section  ">
+                    <div class="card boxes change-bgcolor" style="width: 18rem;">
+                        <div class="card-body">
+                            <p><i class="bi bi-globe2 text-primary h1"></i></p>
+                            <h5 class="card-title mx-3">Lorem Ipsum
+                            </h5>
+                            <p class="card-text">Voluptatum deleniti atque corrupti quos dolores et quas molestias
+                                excepturi
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="project-section">
+                    <div class="card boxes change-bgcolor" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="bi bi-file-earmark-fill text-primary h1"></i>
+                            <h5 class="card-title mt-3">Sed ut perspiciatis
+                            </h5>
+                            <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="project-section">
+                    <div class="card boxes change-bgcolor" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="bi bi-speedometer2 text-primary h1"></i>
+                            <h5 class="card-title mt-3">Magni Dolores</h5>
+                            <p class="card-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="project-section">
+                    <div class="card boxes change-bgcolor" style="width: 18rem;">
+                        <div class="card-body">
+                            <i class="bi bi-globe-asia-australia text-primary h1"></i>
+                            <h5 class="card-title mt-3">Nemo Enim</h5>
+                            <p class="card-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                                blanditiis
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- about page -->
+    <div class="text-center mt-5 pt-5" style="background-color: #f6f9fe;" id="about">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill"
+            style="background-color: #f1f6fe;">about
+        </span>
+        <p class="mt-3 fw-bold h2 text-dark">Find Out More <span class="text-primary">About Us</span> </p>
+        <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est <br> adipisci expedita at voluptas atque
+            vitae
+            autem.</p>
+        <div class="container ">
+            <div class="row">
+                <div class="col-6">
+                    <img src="./images/about.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-6 text-start ">
+                    <p class="h3 ">Voluptatem dignissimos provident quasi corporis voluptates sit
+                        assumenda.</p>
+                    <p class="h6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut labore et dolore magna
+                        aliqua.</p>
+                    <div class="row">
+                        <div class="col-2 align-self-center text-center bg-white rounded-circle p-4"><i
+                                class="bi bi-images h2 bg-white text-primary "></i>
+                        </div>
+                        <div class="col-10  text-start">
+
+                            <p class="h4"> Ullamco laboris nisi ut aliquip consequat</p>
+                            <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 align-self-center text-center bg-white rounded-circle p-4"><i
+                                class="bi bi-images h2 bg-white text-primary "></i>
+                        </div>
+                        <div class="col-10  text-start">
+
+                            <p class="h4"> Magnam soluta odio exercitationem reprehenderi</p>
+                            <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna pasata redi
+                            </p>
+                        </div>
+                    </div>
+                    <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                        in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia
+                        deserunt mollit anim id est laborum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- progress bar dynamic content js -->
+
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-6 ">
+                <p>HTML</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success " role="progressbar" aria-valuenow="0"
+                        aria-valuemin="0" style="width: 100%;" value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <p>PHP</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success active" role="progressbar"
+                        aria-valuenow="0" aria-valuemin="0" style="width: 80%;" value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 ">
+                <p>CSS</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success active" role="progressbar"
+                        aria-valuenow="0" aria-valuemin="0" style="width: 90%;" value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <p>WORDPRESS/CMS</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success active" style="width: 80%;"
+                        role="progressbar" aria-valuenow="0" aria-valuemin="0" style="width: 90%;"
+                        value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 ">
+                <p>JAVASCRIPT</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success active" role="progressbar"
+                        aria-valuenow="0" aria-valuemin="0" style="width: 75%;" value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <p>PHOTOSHOP</p>
+                <div class="progress">
+                    <div id="dynamic" class="progress-bar progress-bar-success active" role="progressbar"
+                        aria-valuenow="0" aria-valuemin="0" style="width: 55%;" value=aria-valuemax="100">
+                        <span id="current-progress"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- counter code -->
+
+    <div class="wrapper mt-5 pt-5 h-50">
+        <div class="counter col_fourth  text-center" style="background-color: #f1f6fe;">
+            <i class="bi bi-emoji-smile h3 bg-primary rounded-circle p-2 text-white"></i>
+            <h2 class="timer count-title count-number" data-to="223" data-speed="1500"></h2>
+            <p class="count-text ">Happy Clients</p>
+        </div>
+
+        <div class="counter col_fourth text-center" style="background-color: #f1f6fe;">
+            <i class="bi bi-clipboard-data  h3 bg-primary rounded-circle p-2 text-white"></i>
+            <h2 class="timer count-title count-number" data-to="521" data-speed="1500"></h2>
+            <p class="count-text ">Projects </p>
+        </div>
+
+        <div class="counter col_fourth text-center" style="background-color: #f1f6fe;">
+            <i class="bi bi-headset  h3 bg-primary rounded-circle p-2 text-white"></i>
+            <h2 class="timer count-title count-number" data-to="1463" data-speed="1500"></h2>
+            <p class="count-text ">Hours Of Support</p>
+        </div>
+
+        <div class="counter col_fourth end text-center" style="background-color: #f1f6fe;">
+            <i class="bi bi-people  h3 bg-primary rounded-circle p-2 text-white"></i>
+            <h2 class="timer count-title count-number" data-to="15" data-speed="1500"></h2>
+            <p class="count-text ">Hard Workers</p>
+        </div>
+    </div>
+
+    <div class="container-fluid align-self-center" style="background-color: #f1f6fe;">
+        <div class="row">
+            <div class="col-2 px-5 mt-2">
+                <img src="./images/client-1.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-2 px-5 mt-2"><img src="./images/client-2.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-2 px-5 mt-2"><img src="./images/client-3.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-2 px-5 mt-2"><img src="./images/client-4.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-2 px-5 mt-2"><img src="./images/client-5.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-2 px-5 mt-2"><img src="./images/client-6.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="text-center mt-5 pt-5">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill" style="background-color: #f1f6fe;">
+            SERVICES</span>
+        <p class="mt-2 fw-bold text-dark h3">Check our <span class="text-primary">Services</span> </p>
+        <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est <br> adipisci expedita at voluptas atque
+            vitae
+            autem.</p>
+        <div class="container ">
+            <div class="row justify-content-between">
+                <div class="col-3  ">
+                    <div class="card text-center mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi bi-globe border border-1 rounded-2 text-primary h4  p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card text-center  mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi bi-journal-text border border-1 rounded-2 text-primary h4  p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card text-center  mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi bi-speedometer2 border border-1 rounded-2 text-primary h4  p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row  justify-content-between">
+                <div class="col-3">
+                    <div class="card text-center mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi bi-globe-americas border border-1 rounded-2 text-primary h4  p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card text-center  mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi-file-play border border-1 rounded-2 text-primary h4  p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card text-center  mt-5 pt-2 " style="width: 24rem; height: 18rem;">
+                        <div class="card-body  pt-5 mt-2">
+                            <i class="bi bi-house-door-fill border border-1 rounded-2 text-primary h4     p-3 m-3 "
+                                style="background-color: #f1f6fe;"></i>
+                            <h5 class="card-title mt-4">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the
+                                card's
+                                content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- image gallary dynamic adjust -->
+
+
+    <div class="text-center mt-5 pt-5" id="portfolio">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill" style="background-color: #f1f6fe;">
+            PORTFOLIO</span>
+        <p class="text-dark mt-2 h3 fw-bold">Check our <span class="text-primary">Portfolio</span></p>
+        <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est <br>adipisci expedita at voluptas atque
+            vitae
+            autem.</p>
+        <ul class="list-unstyled d-flex justify-content-center fs-5">
+            <li class="mx-2">All</li>
+            <li class="mx-2">App</li>
+            <li class="mx-2">Card</li>
+            <li class="mx-2">Web</li>
+        </ul>
+        <div class="container ">
+            <section id="photos">
+                <img class="m-3 p-3" src="./images/portfolio-1.jpg" alt="Cute cat">
+                <img class="m-3 p-3" src="./images/portfolio-4.jpg">
+                <img class="m-3 p-3" src="./images/portfolio-3.jpg" alt="Serious cat">
+                <img class="m-3 p-3" src="./images/portfolio-5.jpg" alt="Serious cat">
+                <img class="m-3 p-3" src="./images/portfolio-6.jpg" alt="Serious cat">
+                <img class="m-3 p-3" src="./images/portfolio-2.jpg" alt="Serious cat">
+                <img class="m-3 p-3" src="./images/portfolio-7.jpg">
+                <img class="m-3 p-3" src="./images/portfolio-8.jpg">
+                <img class="m-3 p-3" src="./images/portfolio-9.jpg">
+            </section>
+        </div>
+    </div>
+
+    <!-- team -->
+    <div class="text-center mt-5 pt-5 h-100" id="portfolio" style="background-color:#f6f9fe;">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill"
+            style="background-color: #f1f6fe;">TEAM
+        </span>
+        <p class="h2 text-dark fw-bold">Our Hardworking <span class="text-primary"> Team</span></p>
+        <p> Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae
+            autem.</p>
+        <div class="container ">
+
+            <div class="row row-cols-3 g-3">
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/team-1.jpg" class="card-img-top" alt="Hollywood Sign on The Hill" />
+                        <div class="card-body">
+                            <h5 class="card-title text-start">Card title</h5>
+                            <p class="card-text text-start">
+                                This is a
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/team-2.jpg" class="card-img-top" alt="Palm Springs Road" />
+                        <div class="card-body">
+                            <h5 class="card-title text-start">Card title</h5>
+                            <p class="card-text text-start">
+                                This is a
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/team-3.jpg" class="card-img-top" alt="Los Angeles Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title text-start">Card title</h5>
+                            <p class="card-text text-start">
+                                This is a
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="./images/team-4.jpg" class="card-img-top" alt="Skyscrapers" />
+                        <div class="card-body">
+                            <h5 class="card-title text-start">Card title</h5>
+                            <p class="card-text text-start">
+                                This is a
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- pricing pag -->
+
+    <div class="text-center mt-5 pt-5 h-100" id="portfolio">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill" style="background-color: #f1f6fe;">
+            PRICING</span>
+        <p class="mt-2 h2">Check our
+            <span class="text-primary"> Pricing</span>
+        </p>
+        <p> Ut possimus qui ut temporibus culpa velit eveniet modi omnis est<br> adipisci expedita at voluptas atque
+            vitae
+            autem.</p>
+        <div class="container ">
+
+            <div class="row">
+                <div class="col-3">
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-header bg-light">
+                            Free
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fs-2 text-primary"><sup>$</sup>0<sub class="text-black">/months</sub>
+                            </h5>
+                            <p class="card-text">Aida dere</p>
+                            <p class="card-text">Nec feugiat nisl</p>
+                            <p class="card-text">Nulla at volutpat dola</p>
+                            <p class="card-text">Pharetra massa</p>
+                            <p class="card-text">Massa ultricies mi</p>
+
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-header bg-primary text-white">
+                            Business
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fs-2 text-primary"><sup>$</sup>19<sub class="text-dark">/months</sub>
+                            </h5>
+                            <p class="card-text">Aida dere</p>
+                            <p class="card-text">Nec feugiat nisl</p>
+                            <p class="card-text">Nulla at volutpat dola</p>
+                            <p class="card-text">Pharetra massa</p>
+                            <p class="card-text">Massa ultricies mi</p>
+
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-header bg-light">
+                            Developer
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fs-2 text-primary"><sup>$</sup>29<sub class="text-black">/months</sub>
+                            </h5>
+                            <p class="card-text">Aida dere</p>
+                            <p class="card-text">Nec feugiat nisl</p>
+                            <p class="card-text">Nulla at volutpat dola</p>
+                            <p class="card-text">Pharetra massa</p>
+                            <p class="card-text">Massa ultricies mi</p>
+
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card" style="width: 16rem;">
+                        <div class="card-header bg-light">
+                            Ultimate
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fs-2 text-primary"><sup>$</sup>49<sub class="text-dark">/months</sub>
+                            </h5>
+                            <p class="card-text">Aida dere</p>
+                            <p class="card-text">Nec feugiat nisl</p>
+                            <p class="card-text">Nulla at volutpat dola</p>
+                            <p class="card-text">Pharetra massa</p>
+                            <p class="card-text">Massa ultricies mi</p>
+
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- F A C -->
+
+
+    <!-- contact us page -->
+    <div class="text-center mt-5 pt-5 h-auto" id="portfolio">
+        <span class="text-center px-4 pt-1 pb-1 text-primary fw-bold rounded-pill"
+            style="background-color: #f1f6fe;">CONTACT</span>
+        <p class="h2 fw-bold text-primary mt-2">Contact Us</p>
+        <p> Ut possimus qui ut temporibus culpa velit eveniet modi omnis est<br> adipisci expedita at voluptas atque
+            vitae
+            autem.</p>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6 border border-light pt-5">
+                    <i class="bi bi-globe text-primary border-dark h2 rounded-1  border border-warning"
+                        style="padding: 20px;"></i>
+                    <p class="h4 m-4">Our Address</p>
+                    <p>A108 Adam Street, New York, NY 535022</p>
+                </div>
+                <div class="col-3 border border-light pt-5"><i
+                        class="bi bi-envelope text-primary border-dark h2 rounded-1  border border-warning"
+                        style="padding: 20px;"></i>
+                    <p class="h4 m-4"> Email Us</p>
+                    <p>contact@example.com</p>
+                </div>
+                <div class="col-3 border border-light pt-5"><i
+                        class="bi bi-phone text-primary border-dark h2 rounded-1  border border-warning"
+                        style="padding: 20px;"></i>
+                    <p class="h4 m-4">Call Us</p>
+                    <p>+91 000000000</p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-6">
+                    <img src="./images/hero-bg.jpg" class="img-fluid" alt="" style="height: 350px;">
+                </div>
+                <div class="col-6 h-100">
+                    <form action="">
+                        <div class="row mt-3">
+                            <div class="col-6"><input type="text" class="form-control" placeholder="Your Name"></div>
+                            <div class="col-6"><input type="text" class="form-control" placeholder="Your Email"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col"><input type="text" class="form-control" placeholder="Subject"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <textarea name="textarea" id="" cols="30" rows="5" class="form-control">Message
+                                    </textarea>
+                            </div>
+                        </div>
+                        <input type="text" class="btn btn-primary mt-4 p-2" value="Send Message" name="" id="">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="text-center mt-5 pt-5 h-auto pb-5 " style="background-color: #f6f9fe;" id="portfolio">
+        <p class="text-center h4 fw-bold">Join Our Newsletter</p>
+        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+
+        <input type="text" class="" name="" id="">
+        <input type="button" class="btn btn-primary" value="Subscribe" name="" id="">
+        <div class="input-group mb-3">
+            <input type="text" class="input-group-text p-4 text-center" placeholder="Recipient's username"
+                aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-text bg-primary text-white p-4 text-center" id="basic-addon2">Subscribe</span>
+        </div>
+    </div>
+
+
+    <!-- footer content page  -->
+
+    <div class="text-center mt-5 pt-5 h-auto">
+        <div class="container ">
+            <div class="row">
+                <div class="col-3 text-start">
+                    <p class="h3 fw-bold">BizLand.</p>
+                    <p>A108 Adam Street<br>
+                        New York, NY 535022<br>
+                        United States</p>
+                    <p><b>Phone:</b> +1 5589 55488 55
+                    </p>
+                    <p><b>Email:</b>info@example.com</p>
+                </div>
+                <div class="col-3 text-start text-dark">
+                    <p class="h6 fw-bold">Useful Links</p>
+                    <ul class="list-unstyled mt-4 ">
+                        <li class="mt-3"><a href="">Home</a> </li>
+                        <li class="mt-3"><a href="">About Us</a> </li>
+                        <li class="mt-3"><a href="">Services</a></li>
+                        <li class="mt-3"><a href="">Terms of service</a></li>
+                        <li class="mt-3"><a href="">Privacy policy</a></li>
+                    </ul>
+
+                </div>
+                <div class="col-3 text-start">
+                    <p class="h6 fw-bold">Our Services</p>
+                    <ul class="list-unstyled mt-4 ">
+                        <li class="mt-3"><a href="">Web Design</a> </li>
+                        <li class="mt-3"><a href="">Web Development</a> </li>
+                        <li class="mt-3"><a href="">Product Management</a></li>
+                        <li class="mt-3"><a href="">Marketing</a></li>
+                        <li class="mt-3"><a href="">Graphic Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-3 text-start">
+                    <p class="h6 fw-bold ">Our Social Networks</p>
+                    <p class="mt-3">Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <ul class="list-unstyled d-flex mt-4 ">
+                        <li class="mt-3"><a href=""><i
+                                    class="bi bi-twitter text-white bg-primary mx-2 p-2 rounded-2 "></i></a>
+                        </li>
+                        <li class="mt-3"><a href=""><i
+                                    class="bi bi-facebook text-white bg-primary mx-2 p-2 rounded-2 "></i></a> </li>
+                        <li class="mt-3"><a href=""><i
+                                    class="bi bi-instagram text-white bg-primary mx-2 p-2 rounded-2 "></i></a></li>
+                        <li class="mt-3"><a href=""><i
+                                    class="bi bi-skype text-white bg-primary mx-2 p-2 rounded-2 "></i></a></li>
+                        <li class="mt-3"><a href=""><i
+                                    class="bi bi-linkedin text-white bg-primary mx-2 p-2 rounded-2 "></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="text-start d-flex justify-content-between pt-3 px-5" style="background-color: #f6f9fe;">
+            <p>&copy;Copyright BizLand. All Rights Reserved</p>
+            <p>Designed by BootstrapMade</p>
+        </footer>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

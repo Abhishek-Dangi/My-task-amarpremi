@@ -1,0 +1,123 @@
+body {
+    font-size: 15px;
+}
+
+
+
+.navbar {
+    margin-right: 20px;
+    float: right;
+    height: 80px;
+}
+
+.navbar li {
+    display: inline-block;
+    padding: 5px;
+}
+
+.img1 {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.google {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: 70px;
+}
+
+
+.but1 {
+    color: black;
+    border: none;
+    padding: 10px 17px;
+    background-color: whitesmoke;
+}
+
+.but2 {
+    border: none;
+    padding: 10px 17px;
+    background-color: whitesmoke;
+}
+
+button:hover {
+    border: 1px solid grey;
+    box-shadow: #f2f2f2;
+}
+
+line {
+    border-bottom: 1px solid black;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding-top: 10px;
+    color: #70757a;
+}
+
+footer li {
+    display: inline-block;
+    padding: 1px 5px 2px 1px;
+    margin-bottom: 1px;
+
+}
+
+.search {
+    margin-top: 20px;
+    width: 582px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 8px 20px;
+    padding-left: 50px;
+
+}
+
+.searchbar {
+    height: 25px;
+    width: 24px;
+    position: relative;
+    color: white;
+    left: 70px;
+
+}
+
+.cam {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    left: 571px;
+
+}
+
+button {
+    margin-top: 20px;
+    background-color: #eaedf0;
+
+}
+
+.google li {
+    display: inline-block;
+
+    margin-top: 20px;
+}
+
+.google li a {
+    text-decoration: none;
+    padding-left: 2px;
+    color: #1a0dab;
+}
+
+.rightside {
+    float: right;
+    margin-right: 20px;
+
+}
+
+.rightside li {
+    padding: 2px 10px 0px 3px;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Image Processing with JavaScript</title>
+    <script>
+        // Load the image
+        let img = new Image();
+        img.src = "./images/indesadfx.jpg";
+        img.onload = function () {
+            // Create a canvas element
+            let canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Draw the image on the canvas
+            let ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            // Apply a grayscale filter
+            let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                data[i] = gray;
+                data[i + 1] = gray;
+                data[i + 2] = gray;
+            }
+            ctx.putImageData(imageData, 0, 0);
+
+            // Apply a threshold filter
+            let thresholdValue = 127;
+            imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                let value = gray < thresholdValue ? 0 : 255;
+                data[i] = value;
+                data[i + 1] = value;
+                data[i + 2] = value;
+            }
+            ctx.putImageData(imageData, canvas.width, 0);
+
+            // Apply an edge detection filter
+            imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            data = imageData.data;
+            for (let x = 1; x < canvas.width - 1; x++) {
+                for (let y = 1; y < canvas.height - 1; y++) {
+                    let i = (x + y * canvas.width) * 4;
+                    let tl = ((x - 1) + (y - 1) * canvas.width) * 4;
+                    let tc = (x + (y - 1) * canvas.width) * 4;
+                    let tr = ((x + 1) + (y - 1) * canvas.width) * 4;
+                    let cl = ((x - 1) + y * canvas.width) * 4;
+                    let cr = ((x + 1) + y * canvas.width) * 4;
+                    let bl = ((x - 1) + (y + 1) * canvas.width) * 4;
+                    let bc = (x + (y + 1) * canvas.width) * 4;
+                    let br = ((x + 1) + (y + 1) * canvas.width) * 4;
+                    let gx = (tr[0] + 2 * cr[0] + br[0]) - (tl[0] + 2 * cl[0] + bl[0]);
+                    let gy = (bl[0] + 2 * bc[0] + br[0]) - (tl[0] + 2 * tc[0] + tr[0]);
+                    let value = Math.sqrt(gx * gx + gy * gy);
+                    data[i] = value;
+                    data[i + 1] = value;
+                    data[i + 2] = value;
+                }
+            }
+            ctx.putImageData(imageData, canvas.width * 2, 0);
+
+            // Add the canvas element to the document
+            document.body.appendChild(canvas);
+
+
+
+        }
+    </script>
+</head>
+
+</html>
